@@ -13,6 +13,18 @@ function isValidDate(inputDate) {
 app.use(cors({ optionsSuccessStatus: 200 }));
 app.use(express.static('public'));
 
+app.get("/api/", function (req, res) {
+	
+	let today = new Date()
+	const weekday = weekdays[today.getDay()]
+	const dateOfMo = today.getDate() > 10 ? today.getDate() : `0${today.getDate()}`
+	const month = months[today.getMonth()]
+	const year = today.getFullYear()
+	const time = today.toTimeString()
+	
+	res.json({ unix: today.valueOf(), utc: `${weekday}, ${dateOfMo} ${month} ${year} ${time}` });
+});
+
 // Lift most specific routing highest
 app.get("/api/:date", function (req, res) {
 
