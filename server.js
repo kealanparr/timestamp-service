@@ -2,6 +2,9 @@ var express = require('express');
 var cors = require('cors');
 var app = express();
 
+const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const months   = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 function isValidDate(inputDate) {
 	return inputDate && d.getTime && !isNaN(d.getTime());
 }
@@ -12,8 +15,16 @@ app.use(express.static('public'));
 
 // Lift most specific routing highest
 app.get("/api/:date", function (req, res) {
-	console.log('ok ok ok :)')
-  res.json({ unix: new Date(req.params.date).valueOf(), utc: new Date(req.params.date)	});
+
+	const inputDate = new Date(req.params.date)
+
+	const weekday = weekdays[inputDate.getDay()]
+	const dateOfMo = inputDate.getDate() > 10 ? inputDate.getDate() : `0${inputDate.getDate()}`
+	const month = months[inputDate.getMonth()]
+	const year = inputDate.getFullYear()
+	const time = "00:00:00 GMT"
+
+  res.json({ unix: new Date(req.params.date).valueOf(), utc: `${weekday}, ${dateOfMo} ${month} ${year} ${time}` });
 });
 
 // Return index.html
