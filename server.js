@@ -6,7 +6,7 @@ const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const months   = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 function isValidDate(inputDate) {
-	return inputDate && d.getTime && !isNaN(d.getTime());
+	return inputDate && inputDate.getTime && !isNaN(inputDate.getTime());
 }
 
 // Some legacy browsers choke on HTTP 204
