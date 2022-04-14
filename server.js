@@ -17,11 +17,11 @@ app.use(express.static('public'));
 app.get("/api/:date", function (req, res) {
 
 	let inputDate = ""
-	const numbersOnly = /[0-9]/g.test(req.params.date) // Check if the date is unix timestamp (1451001600000) or yy/mm/dd format
-	if (numbersOnly) {
-		inputDate = new Date(+req.params.date)
-	} else {
+	const hasDash = req.params.date.includes("-") // Check if the date is unix timestamp (1451001600000) or yy-mm-dd format
+	if (hasDash) {
 		inputDate = new Date(req.params.date)
+	} else {
+		inputDate = new Date(+req.params.date)
 	} 
 	
 	if (isValidDate(inputDate)) {
