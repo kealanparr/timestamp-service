@@ -2,9 +2,6 @@ var express = require('express');
 var cors = require('cors');
 var app = express();
 
-const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const months   = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
 function isValidDate(inputDate) {
 	return inputDate && inputDate.getTime && !isNaN(inputDate.getTime());
 }
@@ -37,13 +34,7 @@ app.get("/api/:date", function (req, res) {
 	} 
 	
 	if (isValidDate(inputDate)) {
-		const weekday = weekdays[inputDate.getDay()]
-		const dateOfMo = inputDate.getDate() > 10 ? inputDate.getDate() : `0${inputDate.getDate()}`
-		const month = months[inputDate.getMonth()]
-		const year = inputDate.getFullYear()
-		const time = inputDate.toTimeString()
-	
-		res.json({ unix: inputDate.valueOf(), utc: `${weekday}, ${dateOfMo} ${month} ${year} ${time}` });
+		res.json({ unix: inputDate.valueOf(), utc: inputDate.toGMTString() });
 	} else {
 		res.json({ error : "Invalid Date" })
 	}
