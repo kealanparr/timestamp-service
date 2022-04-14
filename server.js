@@ -18,13 +18,17 @@ app.get("/api/:date", function (req, res) {
 
 	const inputDate = new Date(req.params.date)
 
-	const weekday = weekdays[inputDate.getDay()]
-	const dateOfMo = inputDate.getDate() > 10 ? inputDate.getDate() : `0${inputDate.getDate()}`
-	const month = months[inputDate.getMonth()]
-	const year = inputDate.getFullYear()
-	const time = "00:00:00 GMT"
-
-  res.json({ unix: new Date(req.params.date).valueOf(), utc: `${weekday}, ${dateOfMo} ${month} ${year} ${time}` });
+	if (isValidDate(inputDate)) {
+		const weekday = weekdays[inputDate.getDay()]
+		const dateOfMo = inputDate.getDate() > 10 ? inputDate.getDate() : `0${inputDate.getDate()}`
+		const month = months[inputDate.getMonth()]
+		const year = inputDate.getFullYear()
+		const time = "00:00:00 GMT"
+	
+		res.json({ unix: new Date(req.params.date).valueOf(), utc: `${weekday}, ${dateOfMo} ${month} ${year} ${time}` });
+	} else {
+		res.json({ error : "Invalid Date" })
+	}
 });
 
 // Return index.html
