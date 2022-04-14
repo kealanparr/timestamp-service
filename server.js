@@ -22,7 +22,7 @@ app.get("/api/:date", function (req, res) {
 
 	let inputDate = ""
 	const hasDash = req.params.date.includes("-") // Check if the date is unix timestamp (1451001600000) or yy-mm-dd format
-	const hasSpace = req.params.date.includes(" ")
+	const hasSpace = req.params.date.includes(" ") // Or if they've passed in directly, the timestamp like: 05 October 2011, GMT url-encoded 05%20October%202011,%20GMT
 	if (hasDash || hasSpace) {
 		inputDate = new Date(decodeURI(req.params.date))
 	} else {
