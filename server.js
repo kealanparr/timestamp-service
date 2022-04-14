@@ -18,6 +18,6 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-var listener = app.listen(process.env.PORT || 5000, function () {
-  console.log('App is listening on port ' + process.env.PORT || 5000);
+app.listen(process.env.PORT || 5000, function () {
+  console.log('App is listening on port ' + (process.env.PORT || 5000));
 });
