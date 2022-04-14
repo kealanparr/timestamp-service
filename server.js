@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var cors = require('cors');
 
-// some legacy browsers choke on 204
+// Some legacy browsers choke on HTTP 204
 app.use(cors({ optionsSuccessStatus: 200 }));
 app.use(express.static('public'));
 
