@@ -20,6 +20,8 @@ app.get("/api/", function (req, res) {
 // Lift most specific routing highest
 app.get("/api/:date", function (req, res) {
 
+	console.log(req.params.date)
+
 	let inputDate = ""
 	const hasDash = req.params.date.includes("-") // Check if the date is unix timestamp (1451001600000) or yy-mm-dd format
 	if (hasDash) {
