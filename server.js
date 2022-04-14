@@ -13,13 +13,8 @@ app.use(express.static('public'));
 app.get("/api/", function (req, res) {
 	
 	let today = new Date()
-	const weekday = weekdays[today.getDay()]
-	const dateOfMo = today.getDate() > 10 ? today.getDate() : `0${today.getDate()}`
-	const month = months[today.getMonth()]
-	const year = today.getFullYear()
-	const time = today.toTimeString()
 	
-	res.json({ unix: today.valueOf(), utc: `${weekday}, ${dateOfMo} ${month} ${year} ${time}` });
+	res.json({ unix: today.valueOf(), utc: today.toGMTString() });
 });
 
 // Lift most specific routing highest
