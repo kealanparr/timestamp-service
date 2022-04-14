@@ -41,7 +41,7 @@ app.get("/api/:date", function (req, res) {
 		const dateOfMo = inputDate.getDate() > 10 ? inputDate.getDate() : `0${inputDate.getDate()}`
 		const month = months[inputDate.getMonth()]
 		const year = inputDate.getFullYear()
-		const time = "00:00:00 GMT"
+		const time = inputDate.toTimeString()
 	
 		res.json({ unix: inputDate.valueOf(), utc: `${weekday}, ${dateOfMo} ${month} ${year} ${time}` });
 	} else {
